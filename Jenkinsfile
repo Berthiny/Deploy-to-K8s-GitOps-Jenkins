@@ -10,7 +10,7 @@ pipeline {
         
         stage('Build image') {
             steps {
-                sh 'docker build -t berthiny/test:${env.BUILD_ID} .'     
+                sh 'docker build -t berthiny/test .'     
             }
         }
         
@@ -24,7 +24,7 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dockerhubPassword', usernameVariable: 'dockerhubUser')]) {
         	        sh 'docker login -u ${env.dockerhubUser} -p ${env.dockerhubPassword}'
-                    sh 'docker push berthiny/test:${env.BUILD_ID}'
+                    sh 'docker push berthiny/test'
                 }
             }
         }
