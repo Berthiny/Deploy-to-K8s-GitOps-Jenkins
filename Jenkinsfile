@@ -12,6 +12,7 @@ pipeline {
             steps {
                 withDockerRegistry(credentialsId:'dockerhub', url:'https://hub.docker.com') {
                     def app = docker.build("berthiny/test:${env.BUILD_ID}")
+                    app.push()
                 }
             }
         }
