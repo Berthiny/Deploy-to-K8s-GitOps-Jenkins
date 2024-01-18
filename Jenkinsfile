@@ -1,6 +1,6 @@
 pipeline {
     agent any
-    #def app
+
     stages {
         stage('Clone repository') {
             checkout scmGit(branches: [[name: 'main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Berthiny/Deploy-to-K8s-GitOps-Jenkins']])
