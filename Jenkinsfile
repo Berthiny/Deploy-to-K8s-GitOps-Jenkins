@@ -25,6 +25,7 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
         	        sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
                     sh 'docker push berthiny/test:${env.BUILD_ID}'
+                }
             }
         }
         
