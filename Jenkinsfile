@@ -22,8 +22,8 @@ pipeline {
         
         stage('Push image') { 
             steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-        	        sh 'docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}'
+                withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dockerhubPassword', usernameVariable: 'dockerhubUser')]) {
+        	        sh 'docker login -u ${env.dockerhubUser} -p ${env.dockerhubPassword}'
                     sh 'docker push berthiny/test:${env.BUILD_ID}'
                 }
             }
