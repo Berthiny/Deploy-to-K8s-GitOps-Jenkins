@@ -10,7 +10,7 @@ pipeline {
         
         stage('Build image') {
             steps {
-                docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                withDockerRegistry(credentialsId:'dockerhub', url:'https://hub.docker.com') {
                     def app = docker.build("berthiny/test:${env.BUILD_ID}")
                 }
             }
@@ -24,7 +24,7 @@ pipeline {
         
         stage('Push image') { 
             steps {
-                docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                withDockerRegistry('https://registry.hub.docker.com', 'dockerhub') {
                     app.push()
                 }
             }
