@@ -1,6 +1,5 @@
 pipeline {
     agent any
-    def app
     
     stages {
         stage('Clone repository') {
@@ -12,7 +11,7 @@ pipeline {
         stage('Build image') {
             steps {
                 docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-                    app = docker.build("berthiny/test:${env.BUILD_ID}")
+                    def app = docker.build("berthiny/test:${env.BUILD_ID}")
                 }
             }
         }
