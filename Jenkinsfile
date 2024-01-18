@@ -22,9 +22,9 @@ pipeline {
         
         stage('Push image') { 
             steps {
-                withDockerRegistry('https://registry.hub.docker.com', 'dockerhub') {
-                    app.push()
-                }
+                withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
+        	        sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+                    sh 'docker push berthiny/test:${env.BUILD_ID}'
             }
         }
         
