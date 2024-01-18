@@ -10,7 +10,9 @@ pipeline {
         
         stage('Build image') {
             steps {
-                app = docker.build("berthiny/test")
+                step {
+                    app = docker.build("berthiny/test")
+                }
             }
         }
         
