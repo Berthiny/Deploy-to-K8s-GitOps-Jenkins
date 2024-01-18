@@ -19,13 +19,16 @@ pipeline {
                 sh 'echo "Tests passed"'
             }
         }
+
+       stage('Login') {
+           steps {
+				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+			}
+		}
         
         stage('Push image') { 
             steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dockerhubPassword', usernameVariable: 'dockerhubUser')]) {
-        	        sh 'docker login -u ${env.dockerhubUser} -p ${env.dockerhubPassword}'
-                    sh 'docker push berthiny/test'
-                }
+                sh 'docker push berthiny/test'
             }
         }
         
