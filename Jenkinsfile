@@ -11,7 +11,9 @@ pipeline {
         
         stage('Build image') {
             steps {
-                app = docker.build("berthiny/test:${env.BUILD_ID}")
+                docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                    app = docker.build("berthiny/test:${env.BUILD_ID}")
+                }
             }
         }
         
