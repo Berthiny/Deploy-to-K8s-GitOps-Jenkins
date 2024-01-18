@@ -2,7 +2,7 @@ node {
     def app
 
     stage('Clone repository') {
-        checkout scm
+        checkout scmGit(branches: [[name: 'main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Berthiny/Deploy-to-K8s-GitOps-Jenkins']])
     }
 
     stage('Build image') {
